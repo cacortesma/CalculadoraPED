@@ -5,32 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora PED (2014/68/UE) - OCA Global</title>
     
-    <!-- Cargamos Tailwind CSS localmente para soporte offline -->
+    <!-- 1. Cargamos Tailwind CSS: local con fallback automático a CDN oficial -->
     <script src="tailwind.js"></script>
-    
-    <!-- Configuración de colores corporativos de OCA Global -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        oca: {
-                            blue: '#002A54', 
-                            red: '#E14D3D',  
-                            light: '#F8FAFC'
+        if (typeof tailwind === 'undefined') {
+            document.write('<script src="https://cdn.tailwindcss.com"><\/script>');
+        }
+    </script>
+    <script>
+        if (typeof tailwind !== 'undefined') {
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            oca: {
+                                blue: '#002A54', 
+                                red: '#E14D3D',  
+                                light: '#F8FAFC'
+                            }
                         }
                     }
                 }
-            }
+            };
         }
     </script>
 
-    <!-- Cargamos React y Babel localmente para soporte offline -->
+    <!-- 2. Cargamos React y ReactDOM: local con fallback automático a CDN unpkg -->
     <script src="react.production.min.js"></script>
+    <script>
+        if (typeof React === 'undefined') {
+            document.write('<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"><\/script>');
+        }
+    </script>
     <script src="react-dom.production.min.js"></script>
+    <script>
+        if (typeof ReactDOM === 'undefined') {
+            document.write('<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"><\/script>');
+        }
+    </script>
+
+    <!-- 3. Cargamos Babel: local con fallback automático a CDN unpkg -->
     <script src="babel.min.js"></script>
+    <script>
+        if (typeof Babel === 'undefined') {
+            document.write('<script src="https://unpkg.com/@babel/standalone/babel.min.js"><\/script>');
+        }
+    </script>
 
     <style>
+        /* Clases corporativas OCA Global fijas para garantizar el diseño bajo cualquier circunstancia */
+        .bg-oca-blue { background-color: #002A54 !important; }
+        .text-oca-blue { color: #002A54 !important; }
+        .border-oca-blue { border-color: #002A54 !important; }
+
+        .bg-oca-red { background-color: #E14D3D !important; }
+        .text-oca-red { color: #E14D3D !important; }
+        .border-oca-red { border-color: #E14D3D !important; }
+
+        .bg-oca-light { background-color: #F8FAFC !important; }
+
         /* Estilos específicos para impresión / exportación a PDF */
         @media print {
             @page {
